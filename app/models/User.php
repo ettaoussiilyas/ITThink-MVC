@@ -65,4 +65,32 @@ public function getStatistics() {
     return $statistics;
 }
 
+public function getAllUsers($filter, $userToSearch =''){
+
+
+      
+        $query = "SELECT * FROM utilisateurs WHERE role != 1"; // by default we show all users except admins
+        
+        // add filter to query
+        if ($filter == 'clients') {
+            $query .= " AND role = 2";
+        } elseif ($filter == 'freelancers') {
+            $query .= " AND role = 3";
+        }
+        
+        // add search condition to query
+        if ($userToSearch) {
+            $query .= " AND nom_utilisateur LIKE ?";
+        }
+        
+        $resul = $this->conn->prepare($query);
+        $resul->execute($userToSearch ? ["%$userToSearch%"] : []);
+        
+        // Fetch and return results
+        $users = $resul->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+   
+
+}
+
 }

@@ -29,10 +29,11 @@ Route::post('/logout', [AuthController::class, 'logout']);
 // admin routers
 
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/users', [AdminController::class, 'users']);
-// Route::get('/admin/dashboard', [AdminController::class, 'index']);
-// Route::get('/admin/dashboard', [AdminController::class, 'index']);
-// Route::get('/admin/dashboard', [AdminController::class, 'index']);
+Route::get('/admin/users', [AdminController::class, 'handleUsers']);
+Route::get('/admin/categories', [AdminController::class, 'categories']);
+Route::get('/admin/testimonials', [AdminController::class, 'testimonials']);
+Route::get('/admin/projects', [AdminController::class, 'projects']);
+
 
 
 // end admin routes 
@@ -44,4 +45,6 @@ Route::get('/admin/users', [AdminController::class, 'users']);
 
 // Dispatch the request
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+
 
