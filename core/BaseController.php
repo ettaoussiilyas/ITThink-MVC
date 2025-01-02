@@ -11,7 +11,6 @@ class BaseController
     }
     public function renderDashboard($view, $data = [])
     {
-        
         extract($data);
         include __DIR__ . '/../app/views/dashboard/' . $view . '.php';
     }
