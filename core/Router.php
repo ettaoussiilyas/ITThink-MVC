@@ -51,6 +51,6 @@ class Router
 
         // Handle 404
         http_response_code(404);
-     	  echo "404 - Not Found";
+     	echo "404 - Not Found";
     }
 }

@@ -1,11 +1,14 @@
 <?php 
 require_once (__DIR__.'/../models/User.php');
+require_once (__DIR__.'/../models/Admin.php');
 
 class AdminController extends BaseController {
     private $UserModel ;
+    private $AdminModel ;
     public function __construct(){
 
         $this->UserModel = new User();
+        $this->AdminModel = new Admin();
   
         
      }
@@ -48,12 +51,17 @@ class AdminController extends BaseController {
     $this->renderDashboard('admin/users',["users"=> $users]);
    }
 
-    // function to remove user
-    // function removeUser($idUser){
-    //     include '../connection.php';
-    //     $removeUser = $conn->prepare("DELETE FROM utilisateurs WHERE id_utilisateur=?");
-    //     $removeUser->execute([$idUser]);
-    // }
+    
+   public function removeUser(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+   
+            $idUser = $_POST['remove_user'];
+            $this->AdminModel->removeUser($idUser);
+            header('Location: /admin/users');
+            
+        }
+    }
     
     // // check the post request to remove the user
     // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_user'])) {

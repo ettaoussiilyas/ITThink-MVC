@@ -18,7 +18,7 @@ Route::setRouter($router);
 
 
 
-// Define routes
+// Define routes 
 // auth routes 
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'handleRegister']);
@@ -29,10 +29,12 @@ Route::post('/logout', [AuthController::class, 'logout']);
 // admin routers
 
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/', [AdminController::class, 'index']);
 Route::get('/admin/users', [AdminController::class, 'handleUsers']);
 Route::get('/admin/categories', [AdminController::class, 'categories']);
 Route::get('/admin/testimonials', [AdminController::class, 'testimonials']);
 Route::get('/admin/projects', [AdminController::class, 'projects']);
+Route::post('/remove-user', [AdminController::class, 'removeUser']); //Delete user
 
 
 

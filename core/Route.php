@@ -18,7 +18,7 @@ class Route
      */
     public static function get($route, $callback)
     {
-        self::addRoute('GET', $route, $callback);
+        self::addRoute('GET', $route, $callback); 
     }
 
     /**

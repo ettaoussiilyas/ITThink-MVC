@@ -89,7 +89,7 @@
         
                                                 <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
                                                     <!-- Remove User Form with Confirmation -->
-                                                    <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this user?');">
+                                                    <form method="POST" action="/remove-user" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this user?');">
                                                         <input type="hidden" name="remove_user" value="<?= $user['id_utilisateur']; ?>">
                                                         <button type="submit" class="text-indigo-600 hover:text-indigo-900">Remove</button>
                                                     </form>
