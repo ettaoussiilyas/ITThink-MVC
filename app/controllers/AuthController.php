@@ -18,6 +18,11 @@ class AuthController extends BaseController {
       
     $this->render('auth/login');
    }
+
+   public function home(){
+
+      $this->render('auth/login');
+   }
    
    public function handleRegister(){
 
@@ -75,7 +80,7 @@ class AuthController extends BaseController {
               if ($user && $role == 1) {
                   header('Location: /admin');
               } else if ($user && $role == 2) {
-                  header('Location: Client/dashboard.php');
+                  header('Location: /client/dashboard');
               } else if ($user && $role == 3) {
                   header('Location: Freelancer/dashboard.php');
               } 

@@ -32,6 +32,7 @@
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                 <div class="text-sm leading-5 text-gray-900 w-full"><?= htmlspecialchars($clientTestimonial['delai']); ?></div>
+                                <!-- <div class="text-sm leading-5 text-gray-900 w-full">< ?= htmlspecialchars($clientTestimonial['delai']); ?></div> -->
                             </td>
 
                             <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200 flex justify-evenly">
