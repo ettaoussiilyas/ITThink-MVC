@@ -42,6 +42,7 @@ Route::post('/add-modify-category', [AdminController::class, 'addModifyCategory'
 Route::post('/add-modify-subcategory', [AdminController::class, 'addModifySubcategory']); //add and mofifier subcategory
 Route::get('/admin/projects', [AdminController::class, 'getProjets']); //get Projects by felters
 Route::post('/admin/projects', [AdminController::class, 'removeProjet']); //delete Projects 
+Route::get('/admin/testimonials', [AdminController::class, 'getAllTestimonials']);//get all testimonials
 
 
 

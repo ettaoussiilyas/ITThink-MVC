@@ -3,18 +3,21 @@ require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Admin.php');
 require_once (__DIR__.'/../models/Categorie.php');
 require_once (__DIR__.'/../models/Projet.php');
+require_once (__DIR__.'/../models/Testimonial.php');
 
 class AdminController extends BaseController {
     private $UserModel ;
     private $AdminModel ;
     private $CategorieModel;
     private $ProjetModel;
+    private $TestimonialModel;
     public function __construct(){
 
         $this->UserModel = new User();
         $this->AdminModel = new Admin();
         $this->CategorieModel = new Categorie();
         $this->ProjetModel = new Projet();
+        $this->TestimonialModel = new Testimonial();
   
         
      }
@@ -143,6 +146,11 @@ class AdminController extends BaseController {
             header('Location: /admin/projects');
             
         }
+    }
+
+    public function getAllTestimonials(){
+        $testimonials = $this->TestimonialModel->getAllTestimonials();
+        $this->renderDashboard('admin/testimonials',["clientTestimonials" => $testimonials]);
     }
 
 }
