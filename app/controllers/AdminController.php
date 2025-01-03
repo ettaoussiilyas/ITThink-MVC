@@ -2,16 +2,22 @@
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Admin.php');
 require_once (__DIR__.'/../models/Categorie.php');
+require_once (__DIR__.'/../models/Projet.php');
+require_once (__DIR__.'/../models/Testimonial.php');
 
 class AdminController extends BaseController {
     private $UserModel ;
     private $AdminModel ;
     private $CategorieModel;
+    private $ProjetModel;
+    private $TestimonialModel;
     public function __construct(){
 
         $this->UserModel = new User();
         $this->AdminModel = new Admin();
         $this->CategorieModel = new Categorie();
+        $this->ProjetModel = new Projet();
+        $this->TestimonialModel = new Testimonial();
   
         
      }
@@ -119,6 +125,32 @@ class AdminController extends BaseController {
             header('Location: /admin/categories');
         }
         
+    }
+
+    public function getProjets() {
+        $filter_by_cat = isset($_GET['filter_by_cat']) ? $_GET['filter_by_cat'] : 'all';
+        $filter_by_sub_cat = isset($_GET['filter_by_sub_cat']) ? $_GET['filter_by_sub_cat'] : 'all';
+        $projectToSearch = isset($_GET['projectToSearch']) ? $_GET['projectToSearch'] : '';
+        $filter_by_status = isset($_GET['filter_by_status']) ? $_GET['filter_by_status'] : '';
+        $projects = $this->ProjetModel->getAllProjects($filter_by_cat, $filter_by_sub_cat,$filter_by_status, $projectToSearch);
+        $categories = $this->CategorieModel->getAllCategories();
+        $this->renderDashboard('admin/projects',["projects" => $projects,"categories" => $categories]);
+     }
+
+
+    public function removeProjet(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['remove_project'])){
+            
+            $idProject = $_POST['id_projet'];
+            $this->ProjetModel->removeProject($idProject);
+            header('Location: /admin/projects');
+            
+        }
+    }
+
+    public function getAllTestimonials(){
+        $testimonials = $this->TestimonialModel->getAllTestimonials();
+        $this->renderDashboard('admin/testimonials',["clientTestimonials" => $testimonials]);
     }
 
 }

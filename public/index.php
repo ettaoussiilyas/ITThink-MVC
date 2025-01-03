@@ -40,6 +40,9 @@ Route::get('/admin/categories', [AdminController::class, 'getAllCategories']); /
 Route::post('/remove/cat-subcat', [AdminController::class, 'removeCatAndSubcat']); //delete cat or sub
 Route::post('/add-modify-category', [AdminController::class, 'addModifyCategory']); //add and mofifier category
 Route::post('/add-modify-subcategory', [AdminController::class, 'addModifySubcategory']); //add and mofifier subcategory
+Route::get('/admin/projects', [AdminController::class, 'getProjets']); //get Projects by felters
+Route::post('/admin/projects', [AdminController::class, 'removeProjet']); //delete Projects 
+Route::get('/admin/testimonials', [AdminController::class, 'getAllTestimonials']);//get all testimonials
 
 
 
