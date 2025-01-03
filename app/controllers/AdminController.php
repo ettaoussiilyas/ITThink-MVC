@@ -2,16 +2,19 @@
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Admin.php');
 require_once (__DIR__.'/../models/Categorie.php');
+require_once (__DIR__.'/../models/Projet.php');
 
 class AdminController extends BaseController {
     private $UserModel ;
     private $AdminModel ;
     private $CategorieModel;
+    private $ProjetModel;
     public function __construct(){
 
         $this->UserModel = new User();
         $this->AdminModel = new Admin();
         $this->CategorieModel = new Categorie();
+        $this->ProjetModel = new Projet();
   
         
      }
@@ -120,6 +123,16 @@ class AdminController extends BaseController {
         }
         
     }
+
+    public function getProjets() {
+        $filter_by_cat = isset($_GET['filter_by_cat']) ? $_GET['filter_by_cat'] : 'all';
+        $filter_by_sub_cat = isset($_GET['filter_by_sub_cat']) ? $_GET['filter_by_sub_cat'] : 'all';
+        $projectToSearch = isset($_GET['projectToSearch']) ? $_GET['projectToSearch'] : '';
+        $filter_by_status = isset($_GET['filter_by_status']) ? $_GET['filter_by_status'] : '';
+        $projects = $this->ProjetModel->getAllProjects($filter_by_cat, $filter_by_sub_cat,$filter_by_status, $projectToSearch);
+        $categories = $this->CategorieModel->getAllCategories();
+        $this->renderDashboard('admin/projects',["projects" => $projects,"categories" => $categories]);
+     }
 
 }
  

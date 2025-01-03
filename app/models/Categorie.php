@@ -28,7 +28,7 @@
                     $id_categorie = $row['id_categorie'];
         
                     // Initialize category if not present
-                    if (!isset($categories[$id_categorie])) {
+                    if (!isset($categories[$id_categorie])) { 
                         $categories[$id_categorie] = [
                             'id_categorie' => $id_categorie,
                             'nom_categorie' => $row['nom_categorie'],
