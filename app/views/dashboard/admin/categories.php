@@ -1,37 +1,5 @@
 <?php
 
-    // add or modify category code
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST["add_modify_category"])) {
-            $category_name = trim($_POST["category_name_input"]);
-            $category_id = isset($_POST["category_id_input"]) ? trim($_POST["category_id_input"]) : '';
-
-            if (!empty($category_name)) {
-                // create a new category if id not gived
-                if($category_id==0){
-                    try {
-                        $AddCategoryQuery = $conn->prepare("INSERT INTO categories (nom_categorie) VALUES (:category_name)");
-                        $AddCategoryQuery->execute([':category_name' => $category_name]);
-    
-                    } catch (PDOException $e) {
-                        echo "Database Error: " . $e->getMessage();
-                    }
-                }
-                // modify category if id gived
-                else{
-                    try {
-                        $modifyCategoryQuery = $conn->prepare("UPDATE categories SET nom_categorie = ? WHERE id_categorie = ?");
-                        $modifyCategoryQuery->execute([$category_name,$category_id]);
-    
-                    } catch (PDOException $e) {
-                        echo "Database Error: " . $e->getMessage();
-                    }
-                }
-                
-            } 
-        } 
-    }
-
     // add or modify subcategory code
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["add_modify_subcategory"])) {
@@ -77,8 +45,8 @@
         <section class="p-8 antialiased md:py-16">
             <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                 <div class="mb-4 flex items-center justify-between gap-4 md:mb-8">
-                            <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Categories</h2>
-                            <button id="add_categorie_button" class="text-gray-100 bg-gray-900 hover:bg-gray-700 p-3 mb-5 mr-5 rounded-sm">Add Categorie</button>
+                    <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Categories</h2>
+                    <button id="add_categorie_button" class="text-gray-100 bg-gray-900 hover:bg-gray-700 p-3 mb-5 mr-5 rounded-sm">Add Categorie</button>
                 </div>
                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     <?php foreach ($categories as $category): ?>
@@ -133,9 +101,41 @@
             </div>
         </section>
 
-        <script src="/assets/js/categories.js"></script>
-        <script data-cfasync="false" src="https://www.creative-tim.com/twcomponents/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-        <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8e2ed63ffe793144","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2024.10.5","token":"1b7cbb72744b40c580f8633c6b62637e"}' crossorigin="anonymous"></script>
     </main>
+    <div id="categorie_modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
+        <div id="add_modal_content" class="flex flex-col w-11/12 md:w-5/12 overflow-y-auto scrollbar-hidden mx-auto mt-10 p-4 bg-gray-200 rounded-sm shadow-lg">
+            <div class="flex justify-between">
+                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">Add Category</h1>
+                <!-- Close Icon -->
+                <button id="close_categorie_modal" class="flex justify-end items-center mb-4 float-right text-xl">&times;</button>
+            </div>
+            <!-- add and modify categorie Form -->
+            <form method="POST" action="/add-modify-category" id="category_form" class="mt-[25%] md:px-10 hidden">
+                <div class="flex w-full">
+                    <label for="category_name_input" class="text-gray-900 font-semibold w-1/3">Category Name:</label>
+                    <input type="text" class="hidden" name="category_id_input" value="0" id="category_id_input">
+                    <input type="text" name="category_name_input" id="category_name_input" value="" class="w-2/3" required>
+                </div>
+                
+                <div class="flex justify-evenly">
+                    <input type="submit" name="add-modify-category" class="text-gray-100 bg-gray-700 border-2 border-gray-700 hover:bg-gray-900 px-8 py-1 mt-20 mr-6 float-right rounded-sm" value="Save">
+                </div>
+            </form>
+            <!-- add and modify subcategorie Form -->
+            <form method="POST" action="/add-modify-subcategory" id="sub_category_form" class="mt-[25%] md:px-10 hidden">
+                <div class="flex w-full">
+                    <label for="subcategory_name_input" class="text-gray-900 font-semibold w-1/3">SubCategory Name:</label>
+                    <input type="text" class="hidden" name="category_parent_id_input" value="0" id="category_parent_id_input">
+                    <input type="text" class="hidden" name="subcategory_id_input" value="0" id="subcategory_id_input">
+                    <input type="text" name="subcategory_name_input" id="subcategory_name_input" value="" class="w-2/3" required>
+                </div>
+                
+                <div class="flex justify-evenly">
+                    <input type="submit" name="add-modify-subcategory" class="text-gray-100 bg-gray-700 border-2 border-gray-700 hover:bg-gray-900 px-8 py-1 mt-20 mr-6 float-right rounded-sm" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/assets/js/categories.js"></script>
 
 <?php require_once(__DIR__.'/../../partials/footer.php');?>

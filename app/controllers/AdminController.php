@@ -98,28 +98,29 @@ class AdminController extends BaseController {
     }
     
 
-    // // function to block user
-    // function changeStatus($idUser){
-    //     include '../connection.php';
+    public function addModifySubcategory(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add-modify-subcategory"])){
+            
+            $name = $_POST['subcategory_name_input'];
+            $id = $_POST['subcategory_id_input'];
+            $parent_category_id = $_POST['category_parent_id_input'];
+            $this->CategorieModel->addModifySubcategory($name,$id,$parent_category_id);
+            header('Location: /admin/categories');
+        }
+        
+    }
+    public function addModifyCategory(){
 
-    //     // get the old status
-    //     $stmt = $conn->prepare("SELECT is_active FROM utilisateurs WHERE id_utilisateur = ?");
-    //     $stmt->execute([$idUser]);
-    //     $currentStatus = $stmt->fetchColumn();
-
-    //     $changeStatus = $conn->prepare("UPDATE utilisateurs SET is_active=? WHERE id_utilisateur=?");
-    //     $changeStatus->execute([$currentStatus==0?1:0,$idUser]);
-    // }
-    // // check the post request to block the user
-    // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['block_user_id'])) {
-    //     $idUser = $_POST['block_user_id'];
-    //     changeStatus($idUser);
-    //     // Redirect to avoid form resubmission after page reload
-    //     header("Location: users.php");
-    //     exit();
-    // }
-
-
- 
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add-modify-category"])){
+            
+            $name = $_POST['category_name_input'];
+            $id = $_POST['category_id_input'];
+            $this->CategorieModel->addModifyCategory($name,$id);
+            header('Location: /admin/categories');
+        }
+        
+    }
 
 }
+ 
+
