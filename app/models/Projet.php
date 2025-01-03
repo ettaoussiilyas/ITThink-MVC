@@ -54,4 +54,16 @@
             $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $projects;
         }
+
+        public function removeProject($idProjet){
+            
+            try{
+                $removeProject = $this->conn->prepare('DELETE FROM projets WHERE id_projet = :id_projet');
+                $removeProject->bindParam(':id_projet', $idProjet);
+                $removeProject->execute();
+            }catch(PDOException $e){
+                echo "Error: " . $e->getMessage();
+            }
+
+        }
     }

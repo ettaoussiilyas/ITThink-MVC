@@ -134,6 +134,17 @@ class AdminController extends BaseController {
         $this->renderDashboard('admin/projects',["projects" => $projects,"categories" => $categories]);
      }
 
+
+    public function removeProjet(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['remove_project'])){
+            
+            $idProject = $_POST['id_projet'];
+            $this->ProjetModel->removeProject($idProject);
+            header('Location: /admin/projects');
+            
+        }
+    }
+
 }
  
 

@@ -41,6 +41,7 @@ Route::post('/remove/cat-subcat', [AdminController::class, 'removeCatAndSubcat']
 Route::post('/add-modify-category', [AdminController::class, 'addModifyCategory']); //add and mofifier category
 Route::post('/add-modify-subcategory', [AdminController::class, 'addModifySubcategory']); //add and mofifier subcategory
 Route::get('/admin/projects', [AdminController::class, 'getProjets']); //get Projects by felters
+Route::post('/admin/projects', [AdminController::class, 'removeProjet']); //delete Projects 
 
 
 

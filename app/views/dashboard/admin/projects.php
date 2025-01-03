@@ -122,7 +122,7 @@
 
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200 flex justify-evenly">
                                         <!-- Remove Project Form with Confirmation -->
-                                        <form method="POST" class="mb-0" onsubmit="return confirm('Are you sure you want to remove this project?');">
+                                        <form method="POST" action="/admin/projects" class="mb-0" onsubmit="return confirm('Are you sure you want to remove this project?');">
                                             <input type="hidden" name="id_projet" value="<?= $project['id_projet']; ?>">
                                             <button type="submit" name="remove_project" class="text-indigo-600 hover:text-indigo-900">Remove</button>
                                         </form>
