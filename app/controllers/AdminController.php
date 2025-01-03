@@ -1,14 +1,17 @@
 <?php 
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Admin.php');
+require_once (__DIR__.'/../models/Categorie.php');
 
 class AdminController extends BaseController {
     private $UserModel ;
     private $AdminModel ;
+    private $CategorieModel;
     public function __construct(){
 
         $this->UserModel = new User();
         $this->AdminModel = new Admin();
+        $this->CategorieModel = new Categorie();
   
         
      }
@@ -62,15 +65,38 @@ class AdminController extends BaseController {
             
         }
     }
+   public function statuUser(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user_statu_id'])){
+            
+            $idUser = $_POST['user_statu_id'];
+            $this->AdminModel->statuUser($idUser);
+            header('Location: /admin/users');
+            
+        }
+    }
+
+
+    public function getAllCategories(){
+        // var_dump($userToSearch);die();
     
-    // // check the post request to remove the user
-    // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_user'])) {
-    //     $idUser = $_POST['remove_user'];
-    //     removeUser($idUser);
-    //     // Redirect to avoid form resubmission after page reload
-    //     header("Location: users.php");
-    //     exit();
-    // }
+        // Call showUsers with both filter and search term
+        $categories = $this->CategorieModel->getAllCategories();
+        $this->renderDashboard('admin/categories',["categories"=> $categories]);
+    }
+
+    //remove categorie or subcategorie
+    public function removeCatAndSubcat(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"&& isset($_POST["delete"])){
+
+            $id = $_POST['id_type'];
+            $type = $_POST['delete'];
+            $this->CategorieModel->removeCatAndSubcat($id , $type);
+            header('Location: /admin/categories');
+            
+        }
+    }
+    
 
     // // function to block user
     // function changeStatus($idUser){
@@ -92,9 +118,6 @@ class AdminController extends BaseController {
     //     header("Location: users.php");
     //     exit();
     // }
-
-
-
 
 
  

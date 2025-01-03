@@ -16,6 +16,23 @@ class Admin extends Db {
         $removeUser->execute([$idUser]);
 
     }
+    public function statuUser($idUser){
+        // var_dump($idUser);
+        // echo "admin model";
+        // die();
+        $checkUserStatus = $this->conn->prepare('SELECT * FROM utilisateurs WHERE id_utilisateur = :id_utilisateur');
+        $checkUserStatus->execute(['id_utilisateur' => $idUser]);
+        $user = $checkUserStatus->fetch(PDO::FETCH_ASSOC);
+
+        if($user['is_active'] == 1){
+            $updateStatus = $this->conn->prepare('UPDATE utilisateurs SET is_active = 2 WHERE id_utilisateur = :id_utilisateur');
+            $updateStatus->execute(['id_utilisateur' => $idUser]);
+        }else{
+            $updateStatus = $this->conn->prepare('UPDATE utilisateurs SET is_active = 1 WHERE id_utilisateur = :id_utilisateur');
+            $updateStatus->execute(['id_utilisateur' => $idUser]);
+        }
+
+    }
 
 
 }

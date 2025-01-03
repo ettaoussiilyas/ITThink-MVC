@@ -37,7 +37,7 @@ class AuthController extends BaseController {
 
              
 
-             $lastInsertId = $this->UserModel->register($user);
+             $lastInsertId = $this->UserModel->register($user); 
 
              
             
@@ -47,7 +47,7 @@ class AuthController extends BaseController {
                  if ($lastInsertId && $role == 1) {
                      header('Location: admin/dashboard');
                  } else if ($lastInsertId && $role == 2) {
-                     header('Location: client/dashboard');
+                     header('Location: /login');
                  } else if ($lastInsertId && $role == 3) {
                      header('Location: freelancer/dashboard');
                  }                    

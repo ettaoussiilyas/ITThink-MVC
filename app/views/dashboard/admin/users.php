@@ -3,7 +3,7 @@
 
 
 
-<main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container px-6 py-8 mx-auto">
                     <div class="flex justify-between">
                     <h3 class="text-3xl font-medium text-gray-700">Users</h3>
@@ -42,7 +42,7 @@
                                                 Name</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                Title</th>
+                                                Id</th>
                                             <th
                                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                                 Status</th>
@@ -71,12 +71,12 @@
                                                 </td>
         
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="text-sm leading-5 text-gray-900 w-full"><?= $user['title'] !== null ? htmlspecialchars($user['title']) : ''; ?></div>
+                                                    <div class="text-sm leading-5 text-gray-900 w-full"><?= $user['id_utilisateur'] !== null ? htmlspecialchars($user['id_utilisateur']) : ''; ?></div>
                                                 </td>
         
                                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to change the status of this user?');">
-                                                        <input type="hidden" name="block_user_id" value="<?= $user['id_utilisateur']; ?>">
+                                                    <form method="POST" action="/statu-user" style="display:inline;" onsubmit="return confirm('Are you sure you want to change the status of this user?');">
+                                                        <input type="hidden" name="user_statu_id" value="<?= $user['id_utilisateur']; ?>">
                                                             <button type="submit" class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                                                 <?= $user['is_active']==1?"Active": "blocked"?>
                                                             </button>
