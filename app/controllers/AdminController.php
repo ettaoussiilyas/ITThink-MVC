@@ -47,9 +47,6 @@ class AdminController extends BaseController {
 
    public function handleUsers(){
   
-
-
-    
     // Get filter and search values from GET
     $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all'; // Default to 'all' if no filter is selected
     $userToSearch = isset($_GET['userToSearch']) ? $_GET['userToSearch'] : ''; // Default to empty if no search term is provided
@@ -151,6 +148,21 @@ class AdminController extends BaseController {
     public function getAllTestimonials(){
         $testimonials = $this->TestimonialModel->getAllTestimonials();
         $this->renderDashboard('admin/testimonials',["clientTestimonials" => $testimonials]);
+    }
+
+
+    public function removeTestimonial(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['remove_testimonial'])){
+
+            $id = $_POST['id_temoignage'];
+            $result = $this->TestimonialModel->removeTestimonial($id);
+            if($result){
+                header('Location: /admin/testimonials');
+            }else{
+                header('Location: /admin/testimonials/erreur');
+            }
+        }
     }
 
 }
