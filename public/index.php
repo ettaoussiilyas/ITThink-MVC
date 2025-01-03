@@ -35,6 +35,11 @@ Route::get('/admin/categories', [AdminController::class, 'categories']);
 Route::get('/admin/testimonials', [AdminController::class, 'testimonials']);
 Route::get('/admin/projects', [AdminController::class, 'projects']);
 Route::post('/remove-user', [AdminController::class, 'removeUser']); //Delete user
+Route::post('/statu-user', [AdminController::class, 'statuUser']); //Chnage status user
+Route::get('/admin/categories', [AdminController::class, 'getAllCategories']); //getAllCategories
+Route::post('/remove/cat-subcat', [AdminController::class, 'removeCatAndSubcat']); //delete cat or sub
+Route::post('/add-modify-category', [AdminController::class, 'addModifyCategory']); //add and mofifier category
+Route::post('/add-modify-subcategory', [AdminController::class, 'addModifySubcategory']); //add and mofifier subcategory
 
 
 
