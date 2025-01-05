@@ -17,6 +17,9 @@ class BaseController
 
     public function renderClient($view, $data = [])
     {
+        // echo 'base';
+        // print_r($data);
+        // die();
         extract($data);
         include __DIR__ . '/../app/views/client/' . $view . '.php';
     }

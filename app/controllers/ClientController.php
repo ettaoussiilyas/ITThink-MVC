@@ -1,12 +1,20 @@
 <?php
 
     require_once (__DIR__.'/../models/Client.php');
+    // require_once (__DIR__.'/../core/BaseController.php');
 
     class ClientController extends BaseController {
 
-        public function index() {
+        private $ClientModel;
 
-            $this->renderClient('index');
+        public function __construct()
+        {
+            $this->ClientModel = new Client();
+        }
+
+        public function index() {
+            $statistics  = $this->ClientModel->getStatistics();
+            $this->renderClient('index' , $statistics);
         }
         public function testimonials() {
 
